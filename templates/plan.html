@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plans</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.plan-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.plan {
+    text-align: center;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.plan h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan p.price {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.plan p.price span {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.plan li {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #d60d0f;
+}
+
+.pricing-options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.pricing-options button {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pricing-options button.active {
+    background-color: #ff6a00;
+}
+
+
+/* Responsive Styles */
+
+@media screen and (max-width: 768px) {
+    .plan-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .plan {
+        width: 80%;
+        margin: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .plan {
+        width: 90%;
+    }
+}
+
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Plan</h1>
+        <div class="pricing-options">
+            <button class="monthly-btn active">Monthly</button>
+            <button class="yearly-btn">Yearly</button>
+        </div>
+        <div class="plan-container">
+            <div class="plan" data-monthly-price="100">
+                <h2>Basic Plan</h2>
+                <p class="price">₹100<span>/month</span></p>
+                <form action="/create_checkout_session", method="POST">
+                <input type="hidden" name="priceId" value="price_1Nc7o5SCPZp6aY1nslokhvUr" />
+      <button type="submit">Checkout</button>
+                    </form>
+                <ul>
+                    <li>Good</li>
+                    <li>Resolution: 480p</li>
+                    <li>Devices you can use to watch: Phone</li>
+                    <li>Number of active screens at one time: 1</li>
+                </ul>
+            </div>
+            <div class="plan" data-monthly-price="200">
+                <h2>Standard Plan</h2>
+                <p class="price">₹200<span>/month</span></p>
+                <form action="/create_checkout_session", method="POST">
+                <input type="hidden" name="priceId" value="price_1Nc7pbSCPZp6aY1nwK9uj4Zv" />
+      <button type="submit">Checkout</button>
+                    </form>
+                <ul>
+                    <li>Video quality: Good</li>
+                    <li>Resolution: 720p</li>
+                    <li>Devices you can use to watch: Phone+Tablet</li>
+                    <li>Number of active screens at one time: 3</li>
+                </ul>
+            </div>
+            <div class="plan" data-monthly-price="500">
+                <h2>Premium Plan</h2>
+                <p class="price">₹500<span>/month</span></p>
+                <form action="/create_checkout_session", method="POST">
+                <input type="hidden" name="priceId" value="price_1Nc7lESCPZp6aY1nj3xRn38C" />
+      <button type="submit">Checkout</button>
+                    </form>
+                <ul>
+                    <li>Video quality: Better</li>
+                    <li>Resolution: 1080P</li>
+                    <li>Devices you can use to watch: Phone+Tablet+Computer</li>
+                    <li>Number of active screens at one time: 5</li>
+                </ul>
+            </div>
+            <div class="plan" data-monthly-price="700">
+                <h2>Regular Plan</h2>
+                <p class="price">₹700<span>/month</span></p>
+                <form action="/create_checkout_session", method="POST">
+                <input type="hidden" name="priceId" value="price_1Nc7rgSCPZp6aY1nX9xyqxUV" />
+      <button type="submit">Checkout</button>
+                    </form>
+                <ul>
+                    <li>Video quality: Best</li>
+                    <li>Resolution: 4K+HDR</li>
+                    <li>Devices you can use to watch: Phone+Tablet+TV</li>
+                    <li>Number of active screens at one time: 10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script>
+const pricingOptions = document.querySelector('.pricing-options');
+const monthlyBtn = pricingOptions.querySelector('.monthly-btn');
+const yearlyBtn = pricingOptions.querySelector('.yearly-btn');
+const plans = document.querySelectorAll('.plan');
+const priceElements = document.querySelectorAll('.price');
+
+monthlyBtn.addEventListener('click', () => {
+    monthlyBtn.classList.add('active');
+    yearlyBtn.classList.remove('active');
+    updatePrices('monthly');
+});
+
+yearlyBtn.addEventListener('click', () => {
+    yearlyBtn.classList.add('active');
+    monthlyBtn.classList.remove('active');
+    updatePrices('yearly');
+});
+
+function updatePrices(pricingOption) {
+
+    plans.forEach((plan, index) => {
+        const monthlyPrice = parseFloat(plan.getAttribute('data-monthly-price'));
+        const yearlyPrice = 10 * monthlyPrice;
+
+        if (pricingOption === 'monthly') {
+            priceElements[index].innerHTML = `₹${monthlyPrice}<span>/month</span>`;
+        } else {
+            priceElements[index].innerHTML = `₹${yearlyPrice}<span>/year</span>`;
+        }
+    });
+}
+
+</script>
+</body>
+</html>
